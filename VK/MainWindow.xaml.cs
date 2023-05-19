@@ -22,18 +22,21 @@ namespace VK
         public ICommand icom;
         public MainWindow()
         {
+
             #region A hátterek beállítása, a click eventek létrehozása
             InitializeComponent();
-            DTablazat.Children.Cast<Button>().ToList().ForEach(button =>
+             DTablazat.Children.Cast<Button>().ToList().ForEach(button =>
             {
                 button.Background = Brushes.LightGreen;
                 button.Click += Disz_Click;
+                diBem.Text += button.Content;
             });
 
             KTablazat.Children.Cast<Button>().ToList().ForEach(button =>
             {
                 button.Background = Brushes.PaleVioletRed;
                 button.Click += Kon_Click;
+                konBem.Text += button.Content;
             });
 
             void Kon_Click(object sender, RoutedEventArgs e)
@@ -41,9 +44,40 @@ namespace VK
                 Button button = (Button)sender;
 
                 if (button.Background == Brushes.PaleVioletRed)
+                {
                     button.Background = Brushes.LightGreen;
+                    if (button.Background == Brushes.LightGreen)
+                    {
+                        konBem.Text = konBem.Text.Replace(button.Content.ToString(), "");
+                    }
+                }
                 else if (button.Background == Brushes.LightGreen)
+                {
                     button.Background = Brushes.PaleVioletRed;
+                    if (button.Background == Brushes.PaleVioletRed)
+                    {
+                        konBem.Text += button.Content.ToString();
+                    }
+                }
+
+                DTablazat.Children.Cast<Button>().ToList().ForEach(button2 =>
+                {
+                    int row1 = Grid.GetRow(button);
+                    int row2 = Grid.GetRow(button2);
+
+                    int column1 = Grid.GetColumn(button);
+                    int column2 = Grid.GetColumn(button2);
+
+                    if (row1 == row2 && column1 == column2 && button.Background == Brushes.PaleVioletRed)
+                    {
+                        button2.Background = Brushes.LightGreen;
+                    }
+
+                    else if (row1 == row2 && column1 == column2 && button.Background == Brushes.LightGreen)
+                    {
+                        button2.Background = Brushes.PaleVioletRed;
+                    }
+                });
             }
 
             void Disz_Click(object sender, RoutedEventArgs e)
@@ -56,7 +90,6 @@ namespace VK
                     if (button.Background == Brushes.PaleVioletRed)
                     {
                         diBem.Text = diBem.Text.Replace(button.Content.ToString(), "");
-                        
                     }
                 }
                 else if (button.Background == Brushes.PaleVioletRed)
@@ -65,11 +98,28 @@ namespace VK
                     if (button.Background == Brushes.LightGreen)
                     {
                         diBem.Text += button.Content.ToString();
+                    }
+                }
 
+                KTablazat.Children.Cast<Button>().ToList().ForEach(button2 =>
+                {
+                    int row1 = Grid.GetRow(button);
+                    int row2 = Grid.GetRow(button2);
+
+                    int column1 = Grid.GetColumn(button);
+                    int column2 = Grid.GetColumn(button2);
+
+                    if (row1 == row2 && column1 == column2 && button.Background == Brushes.PaleVioletRed)
+                    {
+                        button2.Background = Brushes.LightGreen;
                     }
 
-                }
-                
+                    else if (row1 == row2 && column1 == column2 && button.Background == Brushes.LightGreen)
+                    {
+                        button2.Background = Brushes.PaleVioletRed;
+                    }
+                });
+
             }
             #endregion
             icom = new Command(Execute, canExecute);
