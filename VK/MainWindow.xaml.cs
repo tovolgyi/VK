@@ -22,7 +22,7 @@ namespace VK
         public ICommand icom;
         public MainWindow()
         {
-
+            List<string> diszsz = new List<string>(); 
             #region A hátterek beállítása, a click eventek létrehozása
             InitializeComponent();
              DTablazat.Children.Cast<Button>().ToList().ForEach(button =>
@@ -36,7 +36,6 @@ namespace VK
             {
                 button.Background = Brushes.PaleVioletRed;
                 button.Click += Kon_Click;
-                konBem.Text += button.Content;
             });
 
             void Kon_Click(object sender, RoutedEventArgs e)
@@ -71,6 +70,7 @@ namespace VK
                     if (row1 == row2 && column1 == column2 && button.Background == Brushes.PaleVioletRed)
                     {
                         button2.Background = Brushes.LightGreen;
+                        diBem.Text += button2.Content;
                     }
 
                     else if (row1 == row2 && column1 == column2 && button.Background == Brushes.LightGreen)
@@ -112,6 +112,7 @@ namespace VK
                     if (row1 == row2 && column1 == column2 && button.Background == Brushes.PaleVioletRed)
                     {
                         button2.Background = Brushes.LightGreen;
+                        konBem.Text += button2.Content;
                     }
 
                     else if (row1 == row2 && column1 == column2 && button.Background == Brushes.LightGreen)
@@ -141,6 +142,7 @@ namespace VK
                         if (row1 == row2 && column1 == column2 && button.Background == Brushes.LightGreen)
                         {
                             button2.Background = Brushes.PaleVioletRed;
+                            konBem.Text += button2.Content;
                         }
                         else
                         {
